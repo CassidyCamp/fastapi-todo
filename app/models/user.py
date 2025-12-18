@@ -8,6 +8,7 @@ from sqlalchemy import (
     Enum as SQLEnum,
     DateTime,
 )
+from sqlalchemy.orm import relationship
 
 from ..core.database import Base
 
@@ -27,6 +28,8 @@ class User(Base):
 
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
+
+    tasks = relationship('Task', back_populates='user')
 
     def __str__(self):
         return self.username
